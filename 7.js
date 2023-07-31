@@ -2,12 +2,21 @@
 
 // Клас Employee відповідає за створення об'єктів працівників. Кожен працівник має своє ім'я, посаду та зарплату.
 class Employee {
+  constructor(name, position, salary) {
+    this.name = name;
+    this.position = position;
+    this.salary = salary;
+  }
   // Створимо конструктор, що використовується для ініціалізації об'єктів класу. Він приймає три параметри: name, position та salary.
   // Передаємо аргумент в this.name, this.position та this.salary - це властивості класу. Вони ініціалізуються значеннями, переданими в конструктор.
 }
 
 // Клас EmployeeGroup використовується для створення груп працівників. Він містить список працівників.
 class EmployeeGroup {
+  employees = [];
+  addEmployee(employee) {
+    this.employees.push(employee);
+  }
   // Задаємо властивість employees, яке призначене для зберігання працівників. Він ініціалізується як порожній масив.
   // Робимо метод addEmployee, який додає працівника до групи. Він приймає один параметр employee - об'єкт типу Employee.
   // Цей метод додає об'єкт працівника до масиву employees, використовуючи метод push.
@@ -15,6 +24,25 @@ class EmployeeGroup {
 
 // Клас EmployeeIterator відповідає за ітерацію по групі працівників.
 class EmployeeIterator {
+  #employees = null;
+  #currentIndex = 0;
+  constructor(employeeGroup) {
+    this.#employees = employeeGroup.employees;
+  }
+  #hasNext() {
+    return this.#currentIndex < this.#employees.length;
+  }
+  next() {
+    if (this.#hasNext()) {
+      const name = this.#employees[this.#currentIndex].name;
+      this.#currentIndex++;
+      return name;
+    }
+    return null;
+  }
+  list() {
+    return group.employees.map((employee) => employee.password).join(",");
+  }
   // Робимо властивість #employees - це масив працівників, по якому ми будемо ітерувати. Він ініціалізується у конструкторі.
   // Робимо властивість #currentIndex, яка вказує на поточну позицію в масиві працівників. Він ініціалізується зі значенням 0.
   // Конструктор приймає один параметр employeeGroup - об'єкт типу EmployeeGroup. Він ініціалізує властивість #employees this.#employees = employeeGroup.employees.

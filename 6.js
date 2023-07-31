@@ -2,30 +2,58 @@
 
 // Клас Basket представляє кошик для покупок з певною стратегією знижки
 class Basket {
+  constructor(discountPlan) {
+    this.discountPlan = discountPlan;
+    this.goods = [];
+  }
   // Створимо конструктор приймає, що стратегію знижки discountPlan як параметр
   // Властивість discountPlan отримує значення стратегії знижки, яке було передано конструктору
   // Створюємо новий пустий масив для зберігання товарів (goods) в кошику
+
+  addGood(good) {
+    this.goods.push(good);
+  }
+
   // Робимо метод addGood, що приймає один параметр - good, який потрібно додати до масиву
   // Додаємо новий товар в масив товарів
+
+  calculateTotalPrice() {
+    const price = this.goods.reduce((acc, good) => acc + good.price, 0);
+    return this.discountPlan(price);
+  }
+
   // Робимо метод calculateTotalPrice, що розраховує загальну вартість товарів в кошику з урахуванням знижки
   // За допомогою метода reduce ми сумуємо вартість всіх товарів в масиві
-  // Застосовуємо знижку до загальної вартості за допомогою метода applyDiscount нашого об'єкта discountPlan
+
+  applyDiscount(discountPlan) {
+    return this.discountPlan(price);
+  }
 }
+// Застосовуємо знижку до загальної вартості за допомогою метода applyDiscount нашого об'єкта discountPlan
 
 // Клас RegularDiscountPlan: стратегія знижки для постійних клієнтів
 class RegularDiscountPlan extends Basket {
+  applyDiscount(price) {
+    return price * 0.9;
+  }
   // Робимо метод applyDiscount, що приймає ціну price як параметр
   // Повертає ціну з урахуванням знижки в 10% price * 0.9
 }
 
 //Клас VIPDiscountPlan: стратегія знижки для VIP клієнтів
 class VIPDiscountPlan extends Basket {
+  applyDiscount(price) {
+    return price * 0.8;
+  }
   // Робимо метод applyDiscount, що приймає ціну price як параметр
   // Повертає ціну з урахуванням знижки в 20% price * 0.8
 }
 
 // Клас NewClientDiscountPlan: стратегія знижки для нових клієнтів
 class NewClientDiscountPlan extends Basket {
+  applyDiscount(price) {
+    return price * 0.95;
+  }
   // Робимо метод applyDiscount, що приймає ціну price як параметр
   // Повертає ціну з урахуванням знижки в 5% price * 0.95
 }

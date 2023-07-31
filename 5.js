@@ -3,6 +3,13 @@
 
 // Клас BankTransfer представляє собою систему для здійснення банківських переказів
 class BankTransfer {
+  initiateTransfer(amount) {
+    const calculatedAmount = this.calculateFee(amount);
+    console.log(`Ініціюємо банківський переказ: $${calculatedAmount}`);
+  }
+  calculateFee(amount) {
+    return amount * 1.02;
+  }
   // Зробіть метод initiateTransfer, який приймає amount та відповідає за ініціювання банківського переказу
   // Він приймає суму переказу як параметр
   // Для ініціювання банківського переказу спершу обчислюється сума з урахуванням комісії calculatedAmount = this.calculateFee(amount)
@@ -15,6 +22,9 @@ class BankTransfer {
 
 // Клас WalletTransfer представляє собою систему для здійснення переказів з гаманця
 class WalletTransfer {
+  processTransfer(amount) {
+    console.log(`Здійснюємо переказ з гаманця: $${amount}`);
+  }
   // Створіть метод processTransfer, який відповідає за здійснення переказу з гаманця
   // Він приймає суму переказу як параметр
   // Виводимо інформацію про здійснення переказу з гаманця Здійснюємо переказ з гаманця: $${amount}
@@ -23,6 +33,16 @@ class WalletTransfer {
 // Клас TransferAdapter виступає адаптером, який дозволяє нам користуватися
 // методами WalletTransfer так, ніби це BankTransfer.
 class TransferAdapter {
+  constructor(transferSystem) {
+    this.transferSystem = transferSystem;
+  }
+  initiateTransfer(amount) {
+    const calculatedAmount = this.calculateFee(amount);
+    this.transferSystem.processTransfer(calculatedAmount);
+  }
+  calculateFee(amount) {
+    return amount * 1.02;
+  }
   // Робимо конструктор, що приймає об'єкт transferSystem типу WalletTransfer
   // Зберігаємо посилання на об'єкт WalletTransfer у властивості transferSystem
   // Робимо метод initiateTransfer, який адаптує API WalletTransfer до API BankTransfer.

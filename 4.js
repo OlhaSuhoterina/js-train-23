@@ -3,6 +3,10 @@
 
 // Клас Letter представляє об'єкт листа з назвою і текстом.
 class Letter {
+  constructor(title, text) {
+    this.title = title;
+    this.text = text;
+  }
   // Створіть конструктор, що приймає назву листа title та його текстовий вміст text та ініціалізує відповідні поля
   // Записуємо аргумент title в властивість title, яка представляє назву листа в класі
   // Записуємо аргумент text в властивість text, яка представляє  текстовий вміст листа в класі
@@ -10,6 +14,10 @@ class Letter {
 
 // Клас Picture представляє об'єкт зображення з назвою та розміром
 class Picture {
+  constructor(title, size) {
+    this.title = title;
+    this.size = size;
+  }
   // Створіть конструктор, що приймає назву зображення title та його розмір size та ініціалізує відповідні поля
   // Записуємо аргумент title в властивість title, яка представляє назву зображення в класі
   //  Записуємо аргумент size в властивість size, яка представляє розмір зображення
@@ -17,6 +25,10 @@ class Picture {
 
 // Клас Movie представляє об'єкт відеофільму з назвою та тривалістю
 class Movie {
+  constructor(title, duration) {
+    this.title = title;
+    this.duration = duration;
+  }
   // Конструктор приймає назву відеофільму title та його тривалість duration та ініціалізує відповідні поля
   // Записуємо аргумент title в властивість title, яка представляє назву відеофільму в класі
   // Записуємо аргумент duration в властивість duration, яка представляє тривалість відеофільму
@@ -24,6 +36,36 @@ class Movie {
 
 // Клас Portfolio представляє колекцію об'єктів, таких як листи, зображення та відеофільми
 class Portfolio {
+  elements = [];
+
+  addElement(element) {
+    this.elements.push(element);
+  }
+  readLetter(letter) {
+    this.letter = letter;
+    console.log(
+      `Лист: ${letter.title}, Розмір: ${letter.text.length} символів`
+    );
+  }
+  readPicture(letter) {
+    this.letter = letter;
+    console.log(`Картина: ${picture.title}, Розмір: ${picture.size} KB`);
+  }
+  readMovie() {
+    this.letter = letter;
+    console.log(`Фільм: ${movie.title}, Тривалість: ${movie.duration} хвилин`);
+  }
+  readElements() {
+    for (const element of this.elements) {
+      if (element instanceof Letter) {
+        this.readElements(element);
+      } else if (element instanceof Picture) {
+        this.readPicture(element);
+      } else if (element instanceof Movie) {
+        this.readMovie(element);
+      }
+    }
+  }
   // Створимо властивість elements, яка представляє список об'єктів в портфоліо, початкове значення пустий масив
   // Зрібть метод addElement, що приймає element та додає об'єкт до портфоліо
   // Зробіть методи readLetter, що приймає letter та виводить в консоль: "Лист: ${letter.title}, Розмір: ${letter.text.length} символів"
@@ -55,4 +97,4 @@ console.log("Завдання 4 ====================================");
 // console.log(myPortfolio.elements);
 
 // Читаємо інформацію про всі об'єкти в портфоліо
-// myPortfolio.readElements();
+myPortfolio.readElements();

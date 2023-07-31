@@ -3,23 +3,42 @@
 
 // Клас User відповідає за користувача, який може відправляти повідомлення.
 class User {
+  constructor(name, messenger) {
+    this.name = name;
+    this.messenger = messenger;
+  }
+  sendMessage(message) {
+    console.log(`${this.name} відправив повідомлення ${message}`);
+    return this.messenger.sendMessage(message);
+  }
   // Створюємо конструктор класу, який приймає name та messenger як параметри та ініціалізує їх
   // Робимо метод sendMessage який відправляє повідомлення за допомогою відповідного месенджера, та виводить в консоль `${this.name} відправив повідомлення ${message}`.
   // Він приймає один параметр - message - повідомлення, яке потрібно відправити за допомогою методу sendMessage.
+  receiveMessage(user, message) {
+    console.log(
+      `${this.name} отримав повідомлення від ${user.name}: ${message}`
+    );
+  }
   // Метод receiveMessage приймає аргументи user,message та виводить в консоль ${this.name} отримав повідомлення від ${user.name}: ${message}
 }
 
 // Клас SMSMessenger відповідає за відправку повідомлень за допомогою SMS.
 class SMSMessenger {
+  static sendMessage(message) {
+    console.log(`Відправлено SMS: ${message}`);
+  }
   // Створюємо статичний метод sendMessage який приймає один параметр - message, та виводить в консоль `Відправлено SMS: ${message}`
 }
 
 // Клас EmailMessenger відповідає за відправку повідомлень за допомогою Email.
 class EmailMessenger {
+  static EmailMessenger(message) {
+    console.log(`Відправлено Email: ${message}`);
+  }
   // Створюємо статичний метод EmailMessenger який приймає один параметр - message, та виводить в консоль `Відправлено Email: ${message}`
 }
 
-console.log("Завдання 7 ====================================");
+console.log("Завдання 8 ====================================");
 // Після виконання розкоментуйте код нижче
 
 // Створюємо двох користувачів - John та Jane - які відправляють повідомлення за допомогою різних месенджерів.
